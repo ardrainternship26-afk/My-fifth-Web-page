@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Grade Calculator</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Segoe UI',sans-serif;
+    }
+
+    body{
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(135deg,#c2e9fb,#f9d5ec,#d4fc79);
+        padding:20px;
+    }
+
+    .container{
+        width:450px;
+        background:rgba(255,255,255,0.25);
+        backdrop-filter:blur(12px);
+        padding:30px;
+        border-radius:25px;
+        box-shadow:0 8px 25px rgba(0,0,0,0.15);
+        text-align:center;
+    }
+
+    h1{
+        color:#6c63ff;
+        margin-bottom:20px;
+    }
+
+    input{
+        width:100%;
+        padding:12px;
+        margin:8px 0;
+        border:none;
+        border-radius:12px;
+        outline:none;
+        font-size:16px;
+    }
+
+    button{
+        padding:12px 20px;
+        margin:10px 5px;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        color:white;
+        font-size:16px;
+        transition:0.3s;
+    }
+
+    .calc-btn{
+        background:#7b68ee;
+    }
+
+    .print-btn{
+        background:#ff6f91;
+    }
+
+    button:hover{
+        transform:scale(1.05);
+    }
+
+    table{
+        width:100%;
+        margin-top:20px;
+        border-collapse:collapse;
+        overflow:hidden;
+        border-radius:12px;
+    }
+
+    th,td{
+        padding:12px;
+        border:1px solid rgba(255,255,255,0.4);
+    }
+
+    th{
+        background:#7b68ee;
+        color:white;
+    }
+
+    td{
+        background:rgba(255,255,255,0.45);
+    }
+
+    .emoji{
+        margin-top:15px;
+        font-size:25px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📚 Student Grade Calculator</h1>
+
+    <input type="number" id="s1" placeholder="Subject 1 Marks">
+    <input type="number" id="s2" placeholder="Subject 2 Marks">
+    <input type="number" id="s3" placeholder="Subject 3 Marks">
+    <input type="number" id="s4" placeholder="Subject 4 Marks">
+    <input type="number" id="s5" placeholder="Subject 5 Marks">
+
+    <button class="calc-btn" onclick="calculateGrade()">
+        Calculate ✨
+    </button>
+
+    <button class="print-btn" onclick="window.print()">
+        Print 🖨️
+    </button>
+
+    <table id="resultTable" style="display:none;">
+        <tr>
+            <th>Total</th>
+            <th>Average</th>
+            <th>Grade</th>
+        </tr>
+        <tr>
+            <td id="total"></td>
+            <td id="average"></td>
+            <td id="grade"></td>
+        </tr>
+    </table>
+
+    <div class="emoji">🌸💖🎓</div>
+
+</div>
+
+<script>
+
+function calculateGrade(){
+
+    let s1 = Number(document.getElementById("s1").value);
+    let s2 = Number(document.getElementById("s2").value);
+    let s3 = Number(document.getElementById("s3").value);
+    let s4 = Number(document.getElementById("s4").value);
+    let s5 = Number(document.getElementById("s5").value);
+
+    if(
+        document.getElementById("s1").value === "" ||
+        document.getElementById("s2").value === "" ||
+        document.getElementById("s3").value === "" ||
+        document.getElementById("s4").value === "" ||
+        document.getElementById("s5").value === ""
+    ){
+        alert("Please enter all subject marks!");
+        return;
+    }
+
+    let total = s1 + s2 + s3 + s4 + s5;
+    let average = total / 5;
+
+    let grade = "";
+
+    if(average >= 90){
+        grade = "A";
+    }
+    else if(average >= 75){
+        grade = "B";
+    }
+    else if(average >= 50){
+        grade = "C";
+    }
+    else{
+        grade = "F";
+    }
+
+    document.getElementById("total").innerHTML = total;
+    document.getElementById("average").innerHTML = average.toFixed(2);
+    document.getElementById("grade").innerHTML = grade;
+
+    document.getElementById("resultTable").style.display = "table";
+}
+
+</script>
+
+</body>
+</html>
